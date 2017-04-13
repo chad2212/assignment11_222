@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <!--  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width"> -->
+    <link rel="stylesheet" href="lib/onsen/css/onsenui.css"/>
+    <link rel="stylesheet" href="lib/onsen/css/onsen-css-components.css"/>
+    <link rel="stylesheet" href="css/index.css"/>
+    <script src="lib/onsen/js/onsenui.js"></script>
+<!-- Uncommenting the lines below can enable / disable the Android Style -->
+    <!--
+        <script>
+            ons.platform.select("android");
+        </script>
+    <!-- -->
+<!--     <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/index.js"></script> -->
+    <script type="text/javascript" src="js/redBearInteract.js"></script>
+    <title>Assignment 11</title>
+</head>
+<body>
+
+
+<!-- <ons-navigator id="pageNavigator" page="devices.html"></ons-navigator> -->
+<ons-navigator id="pageNavigator" page="deviceDetails.html"></ons-navigator>
+
+<ons-modal id="refreshDevicesModal" animation="fade">
+    <ons-progress-circular indeterminate></ons-progress-circular>
+</ons-modal>
+
+<!-- List of devices page -->
+<ons-template id="devices.html">
+    <ons-page id="devicesPage">
+        <ons-toolbar>
+            <div class="center">All Available Devices</div>
+            <div class="right">
+                <ons-toolbar-button >
+                    <ons-icon icon="ion-refresh" id="refreshButton"></ons-icon>
+                </ons-toolbar-button>
+            </div>
+        </ons-toolbar>
+
+
+       <ons-pull-hook id="pull-hook">
+            Pull to Refresh
+        </ons-pull-hook>
+
+
+        <ons-list id="deviceList">
+
+        </ons-list>
+    </ons-page>
+</ons-template>
+
+
+<!-- Specific device page -->
+<ons-template id="deviceDetails.html">
+    <ons-page id="deviceDetails">
+        <ons-toolbar>
+            <div class="left"><ons-back-button>Disconnect</ons-back-button></div>
+            <div class="center">Device Details</div>
+        </ons-toolbar>
+
+        <ons-modal id="connectingModal" animation="fade">
+            Connecting...<br />
+            <ons-progress-circular indeterminate></ons-progress-circular>
+        </ons-modal>
+
+        <div class="centered" style="text-align:center; ">
+        
+            <ons-list>
+                <!-- CHANGE CURRENT RBG VALUE FROM THIS CONTROL -->
+                <ons-list-header>Current RBG Values</ons-list-header>
+                <ons-list-item>
+                    <div class="center">
+                        <!-- First row -->
+                        <ons-row>
+                          <ons-col width="40px" class="rgb-icons">
+                            <ons-icon icon="md-dot-circle-alt" class="red"></ons-icon>
+                          </ons-col>
+                          <ons-col>
+                            <ons-range max=255 class="max-width" id="current-red-value-range"></ons-range>
+                          </ons-col>
+                          <ons-col width="40px" class="rgb-icons">
+                            <ons-icon icon="md-dot-circle" class="red"></ons-icon>
+                          </ons-col>
+                          <!--This  Should be connected -->
+                          <ons-col>
+                            <span id="current-red-value"></span>
+                          </ons-col>
+                        </ons-row>
+
+
+                        <!-- Second row -->
+                        <ons-row style="margin-top: 20px;">
+                          <ons-col width="40px" class="rgb-icons">
+                            <ons-icon icon="md-dot-circle-alt" class="green"></ons-icon>
+                          </ons-col>
+                          <ons-col>
+                            <ons-range max=255 class="max-width" id="current-green-value-range"></ons-range>
+                          </ons-col>
+                          <ons-col width="40px" class="rgb-icons">
+                            <ons-icon icon="md-dot-circle" class="green"></ons-icon>
+                          </ons-col>
+                          <!--This  Should be connected -->
+                          <ons-col>
+                            <span id="current-green-value"></span>
+                          </ons-col>
+                        </ons-row>
+
+                        <!-- Third row -->
+                        <ons-row style="margin-top: 20px;">
+                          <ons-col width="40px" class="rgb-icons">
+                            <ons-icon icon="md-dot-circle-alt" class="blue"></ons-icon>
+                          </ons-col>
+                          <ons-col>
+                            <ons-range max=255 class="max-width" id="current-blue-value-range"></ons-range>
+                          </ons-col>
+                          <ons-col width="40px" class="rgb-icons">
+                            <ons-icon icon="md-dot-circle" class="blue"></ons-icon>
+                          </ons-col>
+                          <!--This  Should be connected -->
+                          <ons-col>
+                            <span id="current-blue-value"></span>
+                          </ons-col>
+                        </ons-row>
+
+                        <ons-row><br></ons-row>
+                        <!-- Fourth row -->
+                        <ons-row>
+                            <ons-button id="set-current-RGB" modifier="large">Change to new Color</ons-button>
+                        </ons-row>
+
+
+                    </div>
+                </ons-list-item>
+                
+                <!-- CHANGE DEFAULT RBG VALUE FROM THIS CONTROL -->
+                <ons-list-header>Default RBG Values</ons-list-header>
+                <ons-list-item>
+                    <div class="center">
+                        <!-- First row -->
+                        <ons-row>
+                          <ons-col width="40px" class="rgb-icons">
+                            <ons-icon icon="md-dot-circle-alt" class="red"></ons-icon>
+                          </ons-col>
+                          <ons-col>
+                            <ons-range max=255 class="max-width" id="current-red-value-range"></ons-range>
+                          </ons-col>
+                          <ons-col width="40px" class="rgb-icons">
+                            <ons-icon icon="md-dot-circle" class="red"></ons-icon>
+                          </ons-col>
+                          <!--This  Should be connected -->
+                          <ons-col>
+                            <span id="current-red-value"></span>
+                          </ons-col>
+                        </ons-row>
+
+                        <!-- Second row -->
+                        <ons-row style="margin-top: 20px;">
+                          <ons-col width="40px" class="rgb-icons">
+                            <ons-icon icon="md-dot-circle-alt" class="green"></ons-icon>
+                          </ons-col>
+                          <ons-col>
+                            <ons-range max=255 class="max-width" id="current-green-value-range"></ons-range>
+                          </ons-col>
+                          <ons-col width="40px" class="rgb-icons">
+                            <ons-icon icon="md-dot-circle" class="green"></ons-icon>
+                          </ons-col>
+                          <!--This  Should be connected -->
+                          <ons-col>
+                            <span id="current-green-value"></span>
+                          </ons-col>
+                        </ons-row>
+
+                        <!-- Third row -->
+                        <ons-row style="margin-top: 20px;">
+                          <ons-col width="40px" class="rgb-icons">
+                            <ons-icon icon="md-dot-circle-alt" class="blue"></ons-icon>
+                          </ons-col>
+                          <ons-col>
+                            <ons-range max=255 class="max-width" id="current-blue-value-range"></ons-range>
+                          </ons-col>
+                          <ons-col width="40px" class="rgb-icons">
+                            <ons-icon icon="md-dot-circle" class="blue"></ons-icon>
+                          </ons-col>
+                          <!--This  Should be connected -->
+                          <ons-col>
+                            <span id="current-blue-value"></span>
+                          </ons-col>
+                        </ons-row>
+
+                        <ons-row><br></ons-row>
+                        <!-- Fourth row -->
+                        <ons-row>
+                            <ons-button id="set-current-RGB" modifier="large">Set Default Color</ons-button>
+                        </ons-row>
+
+
+                    </div>
+                </ons-list-item>
+
+
+                <!-- On/Off now control -->
+                <ons-list-item>
+                    <div class="center">
+                        On/Off Right now
+                    </div>
+                    <div class="right">
+                        <ons-switch id="on-off-now-button"></ons-switch>
+                    </div>
+                </ons-list-item>
+
+    
+                <!-- On/Off fade control -->
+                <ons-list-item>
+                    <div class="center">
+                        On/Off with Fade
+                    </div>
+                    <div class="right">
+                        <ons-switch id="on-off-fade-button"></ons-switch>
+                    </div>
+                    <ons-range min=0 max=60 class="max-width" id="fade-value"></ons-range>
+                </ons-list-item>
+
+
+                <ons-list-header>Current Time</ons-list-header>
+                <!-- Current Time -->
+                <ons-list-item>
+                    <div class="center">
+                        <p><span id="current-time-realtime"></span><!--Todo: get info from the Arduino--></p>
+                    </div>
+
+                    <div class="right">|<ons-input type="time" input-id="current-time"></ons-input></div>
+                </ons-list-item>
+
+
+                <ons-list-header>Advanced Timer/Alarm</ons-list-header>
+                <!-- On/Off Time in N -->
+                <ons-list-item>
+                    <div class="center">
+                        <p><span id="current-time-realtime"></span><!--Todo: get info from the Arduino--></p>
+                    </div>
+
+                    <div class="right">|<ons-input type="number" input-id="on-off-time-in"></ons-input></div>
+                </ons-list-item>
+
+                <!-- On/Off Time at T -->
+                <ons-list-item>
+                    <div class="center">
+                        <p><span id="on-off-time-at-realtime"></span><!--Todo: get info from the Arduino--></p>
+                    </div>
+
+                    <div class="right">|<ons-input type="time" input-id="on-off-time-at"></ons-input>
+                </ons-list-item>
+
+            </ons-list>
+            
+        </div>
+    </ons-page>
+</ons-template>
+
+
+</body>
+</html>

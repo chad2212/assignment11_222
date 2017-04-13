@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.phonegap.bleBasic" version="1.1.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+    <name>Assignment 11 Alan Shung</name>
+    <description>
+        Assignment 11
+    </description>
+    <author email="" href="http://phonegap.com">
+    </author>
+    <content src="index.html" />
+    <access origin="*" />
+    <gap:plugin name="cordova-plugin-ble-central" source="npm" />
+	<preference name="phonegap-version" value="cli-6.1.0" />
+</widget>
