@@ -14,14 +14,15 @@
         </script>
     <!-- -->
     <script type="text/javascript" src="cordova.js"></script>
-    <script type="text/javascript" src="js/index.js"></script>
-    <script type="text/javascript" src="js/redBearInteract.js"></script>
+<!--     <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript" src="js/redBearInteract.js"></script> -->
     <title>Assignment 11</title>
 </head>
 <body>
 
 
-<ons-navigator id="pageNavigator" page="devices.html"></ons-navigator>
+<!-- <ons-navigator id="pageNavigator" page="devices.html"></ons-navigator> -->
+<ons-navigator id="pageNavigator" page="deviceDetails.html"></ons-navigator>
 
 <ons-modal id="refreshDevicesModal" animation="fade">
     <ons-progress-circular indeterminate></ons-progress-circular>
@@ -85,7 +86,7 @@
                           </ons-col>
                           <!--This  Should be connected -->
                           <ons-col>
-                            <span id="current-red-value"></span>
+                            <span id="current-red-value" style="text-align: right;">100</span>%
                           </ons-col>
                         </ons-row>
 
@@ -161,7 +162,7 @@
                             <ons-icon icon="md-dot-circle-alt" class="green"></ons-icon>
                           </ons-col>
                           <ons-col>
-                            <ons-range max=255 class="max-width" id="current-green-value-range"></ons-range>
+                            <ons-range max=255 class="max-width" input-id="current-green-value-range"></ons-range>
                           </ons-col>
                           <ons-col width="40px" class="rgb-icons">
                             <ons-icon icon="md-dot-circle" class="green"></ons-icon>
